@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchUsers,fetchApiCounts } from './usersSlice'; 
-
+import {Base_URL} from'./components/Server';
 
 export const registerUser = createAsyncThunk(
   'registration/registerUser',
   async (formData, thunkAPI) => {
     try {
-      const response = await fetch('http://localhost:8000/users/register', {
+      const response = await fetch(`${Base_URL}/users/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

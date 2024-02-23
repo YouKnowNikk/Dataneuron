@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
+import {Base_URL} from'./components/Server';
 // Async thunk to fetch users
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
-  const response = await fetch('http://localhost:8000/users/allusers');
+  const response = await fetch(`${Base_URL}/users/allusers`);
   const data = await response.json();
   if (!response.ok) {
     throw new Error(data.message || 'Error fetching users');
@@ -11,7 +11,7 @@ export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
 });
 //Async thunk to fetch counts
 export const fetchApiCounts = createAsyncThunk('users/fetchApiCounts', async (thunkAPI) => {
-  const response = await fetch('http://localhost:8000/users/getcounts');
+  const response = await fetch(`${Base_URL}/users/getcounts`);
   const data = await response.json();
   if (!response.ok) {
     throw new Error(data.message || 'Error fetching API counts');
@@ -21,7 +21,7 @@ export const fetchApiCounts = createAsyncThunk('users/fetchApiCounts', async (th
 // Async thunk to update user
 export const updateUser = createAsyncThunk('users/updateUser', async (updatedUser, thunkAPI) => {
   try {
-    const response = await fetch(`http://localhost:8000/users/updateprofile/${updatedUser._id}`, {
+    const response = await fetch(`${Base_URL}/users/updateprofile/${updatedUser._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ export const updateUser = createAsyncThunk('users/updateUser', async (updatedUse
 });
 // Async thunk to delete user
 export const deleteUser = createAsyncThunk('users/deleteUser', async (userId) => {
-  const response = await fetch(`http://localhost:8000/users/delete/${userId}`, {
+  const response = await fetch(`${Base_URL}/users/delete/${userId}`, {
     method: 'DELETE',
   });
 
